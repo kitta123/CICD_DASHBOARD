@@ -1,0 +1,219 @@
+<div class="form-group">
+    <label *ngFor="let radiobutton of radioItems" class="mr-3">
+        <input type="radio" name="options" (click)="OnRadioBtnChnge(radiobutton)"
+            [checked]="radiobutton === model.option"> {{radiobutton}}
+    </label>
+</div>
+
+<!-- <ng-container *ngIf="arg == 'New'">
+    <a routerLink="newtest" routerLinkActive="active"></a>
+    <app-new-test></app-new-test>
+</ng-container>
+<ng-container *ngIf="arg == 'Existing'">
+    <a routerLink="edittest" routerLinkActive="active"></a>
+    <app-edit-test></app-edit-test>
+</ng-container> -->
+
+<!-- <div class="container">
+    <div class="row">
+
+        <form [formGroup]="testUI" class="form-horizontal">
+            <div>
+                <div class=" mb-1 p-1" style="cursor: pointer;">
+                    <h6>Test Suite</h6>
+                </div>
+                <div>
+                    <div class="card-body" style="padding: 5px;" *ngIf="togglediv">
+                        <div class="form-group form-inline">
+                            <input type="text" placeholder="Test Suite" formControlName="testsuite"
+                                class="form-control mr-5">
+                        </div>
+                    </div>
+
+                    <div class="card-body" style="padding: 5px;" *ngIf="!togglediv">
+                        <div class="form-group form-inline">
+                            <select name="" id="" formControlName="testsuite" #drpVal
+                                (change)="getTestCaseByName(drpVal.value)" class="form-control">
+                                <option [ngValue]="null">Select</option>
+                                <option *ngFor="let _testcase of testSuites" [value]="_testcase.name">
+                                    {{_testcase.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div [hidden]="!togglediv">
+                        <div *ngFor="let addressGroup of testUI.get('testcases')['controls'];let i = index"
+                            [formGroup]="addressGroup">
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border form-inline">
+                                    <p>Prerequisite</p>
+                                </legend>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="text" value="Device" class="form-control" readonly>
+                                            <input type="text" formControlName="testcase" value="Device"
+                                                class="form-control" hidden>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input formControlName="commands" class="form-control"
+                                                placeholder="IP Addesss">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input formControlName="parameter" class="form-control" placeholder="Username">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input formControlName="results" class="form-control" placeholder="Password">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<div class="border-0 rounded-0" [hidden]="!togglediv">
+    <form [formGroup]="testCaseUI">
+        <div>
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border form-inline">
+                    <p>Test Cases</p>
+                </legend>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select formControlName="testcase" #drpVal class="form-control"
+                                [(ngModel)]="testCaseModel.testcase" (change)="onChangeDrpTestCase(drpVal.value)">
+                                <option [ngValue]="null">Select</option>
+                                <option *ngFor="let _testcase of testcaseObj" [value]="_testcase.value">
+                                    {{_testcase.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input formControlName="commands" [(ngModel)]="testCaseModel.commands" class="form-control"
+                                placeholder="parameter_one" [readonly]="disabled">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <input formControlName="parameter" [(ngModel)]="testCaseModel.parameter" class="form-control"
+                            placeholder="parameter_two" [readonly]="disabled">
+                    </div>
+                    <div class="col-md-3">
+                        <input formControlName="results" [(ngModel)]="testCaseModel.results" class="form-control"
+                            placeholder="parameter_three" [readonly]="disabled">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 float-right">
+
+                    </div>
+                    <div class="col-md-3 float-right">
+                        <button class="btn btn-success" style="margin-right: 20px;"
+                            (click)="pushdata(testCaseUI.value)">Apply</button>
+                        <button class="btn btn-danger" (click)="clearForm()">Clear</button></div>
+                </div>
+
+            </fieldset>
+
+        </div>
+    </form>
+</div>
+
+<div class="row" *ngIf="togglediv">
+    <div class="col-md-12">
+        <h5>Test Cases</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Test Case</th>
+                        <th>Commands</th>
+                        <th>Parameters</th>
+                        <th>Result</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let _testcaseData of copy.value;let i = index ">
+                    <tr>
+                        <td>{{_testcaseData.testcase}}</td>
+                        <td>{{_testcaseData.commands}}</td>
+                        <td>{{_testcaseData.parameter}}</td>
+                        <td>{{_testcaseData.results}}</td>
+                        <td>
+                            <div>
+                                <a href="Javascript:void(0)" style="margin-right: 20px;"><i style="color:orange"
+                                        class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a href="Javascript:void(0)" (click)="deleteTestCase(i)"><i style="color:red"
+                                        class="fas fa-trash"></i> </a>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" *ngIf="!togglediv">
+    <div class="col-md-12">
+        <h5>Test Cases</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Test Case</th>
+                        <th>Commands</th>
+                        <th>Parameters</th>
+                        <th>Result</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let _testcaseData of testCasebyName;let i = index ">
+                    <tr>
+                        <td>{{_testcaseData.testcase}}</td>
+                        <td>{{_testcaseData.commands}}</td>
+                        <td>{{_testcaseData.parameter}}</td>
+                        <td>{{_testcaseData.results}}</td>
+                        <td>
+                            <div>
+                                <a href="Javascript:void(0)" style="margin-right: 20px;"><i style="color:orange"
+                                        class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a href="Javascript:void(0)"><i style="color:red" class="fas fa-trash"></i> </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class=" container row" *ngIf="togglediv">
+    <div class="col-md-5"></div>
+    <div class="col-md-5">
+        <button type="button" class="btn btn-success" style="margin-right: 20px;" (click)="postTestUI()">Save</button>
+        <button type="button" class="btn btn-danger">Close</button>
+    </div>
+
+</div> -->
+
+
+<!-- <pre>{{copy.value | json}}</pre> -->
+
+<!-- <pre>{{testUI.value | json}}</pre> -->
+
+<!-- <pre>{{testCaseModel | json}}</pre> -->

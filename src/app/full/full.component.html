@@ -1,0 +1,14 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="wrapper default-theme" [ngClass]="getClasses()">
+    <app-navbar (myEvent)="com1.loadDatafromNavBar()"></app-navbar>
+    <main>
+      <app-sidebar #com1></app-sidebar>
+      <div class="pages container-fluid pt-4 pb-4 pl-4 pr-4 ">
+        <router-outlet  (event)="com1.loadDatafromNavBar()"></router-outlet>
+        <hr>
+        <app-footer></app-footer>
+      </div>
+      <div class="overlay" (click)="toggleSidebar()"></div>
+    </main>
+  </div>
+  <!-- <router-outlet></router-outlet> -->

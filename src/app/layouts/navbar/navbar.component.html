@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-dark flex-fill">
+  <div class="navbar-header pl-2 pr-2 ml-3 text-center">
+    <a class="navbar-brand m-0 w-100" href="javascript:void(0)">
+      <span class="ml-1" style="color: white;">CI CD DASHBOARD</span>
+    </a>
+  </div>
+  <ul class="navbar-nav flex-fill mt-1 align-items-center left-nav">
+    <li class="nav-item navicon">
+      <!-- <a class="btn nav-link" (click)="toggleSidebarPin()" style="color: white;"><i class="fa-2x fa fa-bars"></i></a> -->
+    </li>
+  </ul>
+  <!-- <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed">
+      <ul class="navbar-nav " style='padding-right: 0px;'>
+        <li class="nav-item">
+          <a class="btn nav-link" (click)="navigate();">
+             <img src="https://wiki.jenkins.io/download/attachments/2916393/logo.png?version=1&modificationDate=1302753947000&api=v2" style="width:30%;" alt="" data-toggle="tooltip" title="Jenkins!">
+         <i class="fab fa-jenkins fa-4x" style="color: #ebe9e5f1;font-size: 30px;" data-toggle="tooltip" title="Jenkins!"></i> 
+           
+        <span class="badge badge-pill ba dge-danger">3</span> -->
+
+  <!-- </a>
+        </li>
+      </ul>
+    </div> -->
+
+  <!-- <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed">
+      <ul class="navbar-nav ">
+        <li class="nav-item">
+          <a class="btn nav-link" (click)="navigate1();">
+            <i class="fas fa-cog" style="color: #f0efebf5;font-size: 30px;" data-toggle="tooltip" title="Config!"></i>         
+          </a>
+        </li>
+      </ul>
+    </div> -->
+
+
+
+  <ul class="navbar-nav mb-4 mt-1 align-items-left right-nav  " style='padding-right: 10px;'>
+    <li class="nav-item">
+      <a class="btn nav-link">
+        <i class="fab fa-tumblr-square" style="color: #6599FF;font-size: 30px;" title="PyTest" data-toggle="modal"
+          data-target="#testUI"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="btn nav-link" >
+        <img src="../../../assets/img/clock.png" style="margin-top: 7px;
+          width: 30px;" alt="" data-toggle="modal" data-target="#jenkins" title="Build">
+      </a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav mb-4 mt-1 align-items-left right-nav " style="padding-right: 10px;">
+
+    <li class="nav-item">
+      <a class="btn nav-link">
+        <i class="fas fa-cogs" style="color: #6599FF;font-size: 30px;" title="Config!" data-toggle="modal"
+          data-target="#myModal"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="btn nav-link">
+        <i class="fas fa-sign-out-alt" (click)="logOut()" style="color: #FF9900;font-size: 30px;" title="Log Out!"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<div class="modal" id="testUI">
+  <div class="modal-dialog" style="max-width: 900px;">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5>Test UI</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+      </div>
+
+      <div class="modal-body">
+        <app-test-ui></app-test-ui>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="jenkins">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Job Configuration</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <app-jobconfig></app-jobconfig>
+      </div>
+    </div>
+  </div>
+</div>

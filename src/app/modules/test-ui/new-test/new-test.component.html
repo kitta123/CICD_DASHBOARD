@@ -1,0 +1,119 @@
+<div class="container">
+    <div class="row">
+
+        <form [formGroup]="testUI" class="form-horizontal">
+            <div>
+                <div class=" mb-1 p-1" style="cursor: pointer;">
+                    <h6>Test Suite</h6>
+                </div>
+                <div>
+                    <div class="card-body" style="padding: 5px;" *ngIf="togglediv">
+                        <div class="form-group form-inline">
+                            <input type="text" placeholder="Test Suite" formControlName="testsuite"
+                                class="form-control mr-5">
+                        </div>
+                    </div>
+
+                    <div class="card-body" style="padding: 5px;" *ngIf="!togglediv">
+                        <div class="form-group form-inline">
+                            <!-- <ng-select [items]="testSuites" bindLabel="name" [virtualScroll]="true" bindValue="name"
+                                 placeholder="Select Test Suites" formControlName="testsuite" 
+                                style="width: 175px;" (change)="">
+                            </ng-select> -->
+
+                            <select name="" id="" formControlName="testsuite" #drpVal
+                                (change)="getTestCaseByName(drpVal.value)" class="form-control">
+                                <option [ngValue]="null">Select</option>
+                                <option *ngFor="let _testcase of testSuites" [value]="_testcase.name">
+                                    {{_testcase.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div [hidden]="!togglediv">
+                        <div *ngFor="let addressGroup of testUI.get('testcases')['controls'];let i = index"
+                            [formGroup]="addressGroup">
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border form-inline">
+                                    <p>Prerequisite</p>
+                                </legend>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="text" value="Device" class="form-control" readonly>
+                                            <input type="text" formControlName="testcase" value="Device"
+                                                class="form-control" hidden>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input formControlName="commands" class="form-control"
+                                                placeholder="IP Addesss">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input formControlName="parameter" class="form-control" placeholder="Username">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input formControlName="results" class="form-control" placeholder="Password">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<div class="border-0 rounded-0" [hidden]="!togglediv">
+    <form [formGroup]="testCaseUI">
+        <div>
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border form-inline">
+                    <p>Test Cases</p>
+                </legend>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select formControlName="testcase" #drpVal class="form-control"
+                                [(ngModel)]="testCaseModel.testcase" (change)="onChangeDrpTestCase(drpVal.value)">
+                                <option [ngValue]="null">Select</option>
+                                <option *ngFor="let _testcase of testcaseObj" [value]="_testcase.value">
+                                    {{_testcase.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input formControlName="commands" [(ngModel)]="testCaseModel.commands" class="form-control"
+                                placeholder="parameter_one" [readonly]="disabled">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <input formControlName="parameter" [(ngModel)]="testCaseModel.parameter" class="form-control"
+                            placeholder="parameter_two" [readonly]="disabled">
+                    </div>
+                    <div class="col-md-3">
+                        <input formControlName="results" [(ngModel)]="testCaseModel.results" class="form-control"
+                            placeholder="parameter_three" [readonly]="disabled">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 float-right">
+
+                    </div>
+                    <div class="col-md-3 float-right">
+                        <button class="btn btn-success" style="margin-right: 20px;" (click)="pushdata(testCaseUI.value)">Apply</button>
+                        <button class="btn btn-danger" (click)="clearForm()">Clear</button></div>
+                </div>
+
+            </fieldset>
+
+        </div>
+    </form>
+</div>

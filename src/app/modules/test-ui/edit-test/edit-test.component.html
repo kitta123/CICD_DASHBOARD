@@ -1,0 +1,42 @@
+<div class="row" *ngIf="!togglediv">
+    <div class="col-md-12">
+        <h5>Test Cases</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Test Case</th>
+                        <th>Commands</th>
+                        <th>Parameters</th>
+                        <th>Result</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let _testcaseData of testCasebyName;let i = index ">
+                    <tr>
+                        <td>{{_testcaseData.testcase}}</td>
+                        <td>{{_testcaseData.commands}}</td>
+                        <td>{{_testcaseData.parameter}}</td>
+                        <td>{{_testcaseData.results}}</td>
+                        <td>
+                            <div>
+                                <!--(click)="editData(_testcaseData, i)"-->
+                                <a href="Javascript:void(0)" style="margin-right: 20px;"><i style="color:orange"
+                                        class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a href="Javascript:void(0)"><i style="color:red" class="fas fa-trash"></i> </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class=" container row" *ngIf="togglediv">
+    <div class="col-md-5"></div>
+    <div class="col-md-5">
+        <button type="button" class="btn btn-success" style="margin-right: 20px;" (click)="postTestUI()">Save</button>
+        <button type="button" class="btn btn-danger">Close</button>
+    </div>
+</div>

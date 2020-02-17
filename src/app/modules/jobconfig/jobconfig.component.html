@@ -1,0 +1,80 @@
+
+      <div class="modal-body">
+        <form [formGroup]="buildForm" class="form-horizontal">
+          <div class="form-group">
+            <label>Available Views: </label>
+            <select formControlName="Views" [(ngModel)]="buildFormObj.Views" class="form-control rounded-0">
+              <option [ngValue]="null">Select</option>
+              <!-- <option value="0">--All--</option></option>> -->
+              <!-- <option *ngFor="let summary of ['ssa_onecell_4_3_int_view']" value={{summary}}> -->
+              <option *ngFor="let summary of views" value={{summary}}>
+                {{summary}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Build Type: </label>
+            <select formControlName="Build_types" [(ngModel)]="buildFormObj.Build_types" class="form-control rounded-0">
+              <option [ngValue]="null">Select</option>
+              <!-- <option value="0">--All--</option></option>> -->
+              <!-- <option *ngFor="let summary of ['ssa_onecell_4_3_int_view']" value={{summary}}> -->
+              <option *ngFor="let summary of ['CU','CU and CGRP','CU and NGRP','CU and CGRP and NGRP']">
+                {{summary}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Test Suite: </label>
+            <!-- <select formControlName="TestSuites" [(ngModel)]="buildFormObj.TestSuites"
+            class="form-control rounded-0">
+              <option [ngValue]="null">Select</option>
+              <option *ngFor="let _testSuites of testSuites">
+                {{_testSuites.name}}
+              </option>
+            </select> -->
+            <select name="" id="" formControlName="TestSuites" class="form-control"
+              [(ngModel)]="buildFormObj.TestSuites">
+              <option [ngValue]="null">Select</option>
+              <option *ngFor="let _testcase of testSuites" [ngValue]="_testcase.name">
+                {{_testcase.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label *ngFor="let radiobutton of radioItems" class="mr-3">
+              <input type="radio" name="options" (click)="OnRadioBtnChnge(radiobutton)"
+                [checked]="radiobutton === model.option"> {{radiobutton}}
+            </label>
+          </div>
+
+          <!-- <div class="form-group">
+            <label class="checkbox-inline mr-3">
+              <input type="checkbox" formControlName="Build"  [(ngModel)]="buildFormObj.Build"> Build
+            </label>
+            <label class="checkbox-inline mr-3">
+              <input type="checkbox" formControlName="Upgrade" [(ngModel)]="buildFormObj.Upgrade"> Upgrade
+            </label>
+            <label class="checkbox-inline mr-3">
+              <input type="checkbox" formControlName="Run_tests" [(ngModel)]="buildFormObj.Run_tests"> Run Tests
+            </label>
+          </div> -->
+          <div class="form-group" *ngIf="toggleImgPath">
+            <label>Build Image path: </label>
+            <select formControlName="Build_image_path" [(ngModel)]="buildFormObj.Build_image_path"
+              class="form-control rounded-0">
+              <option [ngValue]="null">Select</option>
+              <!-- <option value="0">--All--</option></option>> -->
+              <option
+                *ngFor="let summary of imagepath"
+                value={{summary}}>
+                {{summary}}
+              </option>
+            </select>
+          </div>
+        </form>
+        <!-- <pre>{{buildFormObj | json}}</pre> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="submitPostBuild()">Run</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>

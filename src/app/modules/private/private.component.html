@@ -1,0 +1,307 @@
+<div class="row" *ngIf="toggleView">
+    <div class="col-md-6 col-lg-6 mb-4">
+      <div class="card border-0 rounded-50">
+        <div class="card-body">
+          <div class="card-innerBody d-flex align-items-center">
+            <div class="card-icon text-light ">
+              <i class="fas fa-id-card-alt " aria-hidden="true" style="color: #FF3333;"></i>
+            </div>
+            <div class="ml-auto">
+              <p class="card-label text-right text-muted">Image ID</p>
+              <h6 class="card-text text-right "> {{img_tag}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-4" data-toggle="modal" data-target="#viewlink" style="cursor:pointer">
+      <div class="card border-0 rounded-50">
+        <div class="card-body">
+          <div class="card-innerBody d-flex align-items-center">
+            <div class="card-icon text-light ">
+              <i class="fas fa-info-circle" aria-hidden="true" style="color: var(--pink);"></i>
+            </div>
+            <div class="ml-auto">
+              <p class="card-label text-right text-muted">View Log</p>
+              <!-- <h6 class="card-text text-right ">
+                <a [attr.href]="job_url" target="_blank"><i class="fas fa-eye"></i> View URL</a></h6> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card border-0 rounded-50">
+        <div class="card-body">
+  
+          <div class="card-innerBody d-flex align-items-center">
+            <div class="card-icon text-light ">
+              <i class="fas fa-stopwatch " aria-hidden="true" style="color: #669999;"></i>
+            </div>
+            <div class="ml-auto">
+              <p class="card-label text-right text-muted">Execution Time</p>
+              <h4 class="card-text text-right "> {{executiontime}} sec</h4>
+              <!-- {{suite_details.executiontime}}&nbsp;Sec -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" *ngIf="toggleView">
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card border-0 rounded-50">
+        <div class="card-body">
+          <div class="card-innerBody d-flex align-items-center">
+            <div class="card-icon text-light ">
+              <i class="fas fa-cogs " aria-hidden="true" style="color: #6F3662;"></i>
+            </div>
+            <div class="ml-auto">
+              <p class="card-label text-right text-muted">Test Suite</p>
+              <h6 class="card-text text-right ">{{name}}</h6>
+              <!-- {{suite_details.name}} -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-6 col-lg-3 mb-4" (click)='filter_table("pass")' style="cursor: pointer;">
+      <div class="card border-0 rounded-50">
+        <div class="card-body">
+          <div class="card-innerBody d-flex align-items-center">
+            <div class="card-icon text-light faa-parent animated-hover">
+              <i class="animated-hover fas fa-thumbs-up" aria-hidden="true" style="color: green;"></i>
+            </div>
+            <div class="ml-auto">
+              <p class="card-label text-right text-muted">Pass</p>
+              <h4 class="card-text text-right">{{pass}}</h4>
+              <!-- {{suite_details.pass}} -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-6 col-lg-3 mb-4" (click)='filter_table("failures")' style="cursor: pointer;">
+      <div class="card border-0 rounded-50">
+        <div class="card-body">
+          <div class="card-innerBody d-flex align-items-center">
+            <div class="card-icon text-light">
+              <i class="far fa-thumbs-down" aria-hidden="true" style="color: red;"></i>
+            </div>
+            <div class="ml-auto">
+              <p class="card-label text-right text-muted">Fail</p>
+              <h4 class="card-text text-right ">{{failures}}</h4>
+              <!-- {{suite_details.failures}} -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-6 col-lg-3 mb-4" (click)='filter_table("total")' style="cursor: pointer;">
+      <div class="card border-0 rounded-50">
+        <div class="card-body">
+          <div class="card-innerBody d-flex align-items-center">
+            <div class="card-icon text-light">
+              <i class="fas fa-stream" aria-hidden="true" style="color: #9F6164;"></i>
+            </div>
+            <div class="ml-auto">
+              <p class="card-label text-right text-muted">Total</p>
+              <h4 class="card-text text-right "> {{ total}}</h4>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  
+  <div class="row" *ngIf="toggleView">
+    <div class="col-lg-12 col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive-md">
+            <table class="table table-hover table-bordered table-striped ">
+              <thead class="bg_gradient">
+                <tr>
+                  <th>Suit Name</th>
+                  <th>Test Name</th>
+                  <!-- <th>Execution Time</th> -->
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <ng-container *ngFor="let value of tableData; let i = index">
+                <tbody>
+                  <tr>
+                    <td>{{suite_details.name}}</td>
+                    <td>{{value.testcase_name}}</td>
+                    <!-- <td>{{value.time }}</td> -->
+                    <td style="width: 100px;" >
+                      
+                      <div >
+                         <!-- *ngIf="i != 0" -->
+                      <ng-container *ngIf="value.status == 'Fail'">
+                        <a href="javascript:void(0)" style="color: red; font-weight: 600;" data-toggle="modal"
+                          (click)="getError(value.message)" data-target="#myModal1"><i
+                            class="fas fa-exclamation-circle"></i> Fail</a>
+                      </ng-container>
+                      <ng-container *ngIf="value.status == 'Pass'">
+                        <span style="color: green; font-weight: 600;"><i class="far fa-check-circle"></i> Pass</span>
+                      </ng-container>
+                    </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </ng-container>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row clearfix" *ngIf="!toggleView">
+    <div class="col-md-12 col-lg-12 mb-4">
+      <div class="card  border-0 rounded-50">
+        <div class="header collapsed mb-1 p-3">
+          <div class="row">
+            <div class="col-md-4" data-toggle="collapse" data-target="#demo" style="cursor: pointer;">
+              <h5>Stage View </h5>
+            </div>
+            <!-- <div class="col-md-4 float-right">
+              <h3><a href="javascript:void(0)"> {{timeLeft}} <i class="fas fa-stopwatch"></i></a></h3>
+            </div>
+            <div class="col-md-4 float-right">
+              <a href="javascript:void(0)" style="text-align: right;" (click)="getProgressBarData()">New Test Suite</a>
+            </div> -->
+          </div>
+        </div>
+        <div id="demo" class="collapse show">
+          <div class="card-body">
+            <div class="col-md-12">
+              <div class="row">
+                <div *ngFor="let _progressData of progressData" class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h6 class="progress-title" [title]="_progressData.execution_time">{{_progressData.name}}</h6>
+                    </div>
+                    <div class="col-md-6 ">
+                      <a href="javascript:void(0)" data-toggle="modal" data-target="#stageLog"
+                        (click)="logData(_progressData.log)">
+                        <i class="far fa-eye"></i> View Log</a>
+                    </div>
+                  </div>
+                  <div class="progress ">
+                    <div class="progress-bar progress-bar-animated progress-bar-striped" [style.width]="_progressData.percentage+'%'"
+                      [style.background-color]="_progressData.pg_bar_color">
+                      <div class="progress-value">{{_progressData.execution_time | number : '1.0-0'}} sec</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- <div class="row clearfix" *ngIf="!toggleView">
+    <div class="col-md-12 col-lg-12 mb-4">
+      <div class="card border-0 rounded-50">
+        <div class=" mb-1 p-3" data-toggle="collapse" data-target="#demo1" style="cursor: pointer;">
+          <h5>Console Output</h5>
+        </div>
+        <div id="demo1" class="collapse">
+          <div class="card-body">
+            {{consoleData}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  <!-- <button data-toggle="collapse" data-target="#demo1">Collapsible</button>
+  
+  <div id="demo1" class="collapse">
+    {{consoleData}}
+  </div> -->
+  
+  <div class="modal" id="stageLog">
+    <div class="modal-dialog" style="max-width: 800px;">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Log Information</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <h6 [innerHTML]="logInfo" id="multi_lines_text" style="word-wrap: break-word;"></h6>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="viewlink">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><i class="fas fa-info-circle"></i> Log Links</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="card">
+            <div class="card-body">
+              <p><i class="fas fa-link" style="margin-right: 10px;"></i> <a [attr.href]="url"
+                  target="_blank">mkclean.log</a></p><br>
+              <p><i class="fas fa-link" style="margin-right: 10px;"></i> <a
+                  href="http://10.53.159.150:8080/jenkins/job/Build_Generator_ssa/lastSuccessfulBuild/artifact/mkcomplete.log"
+                  target="_blank">mkcomplete.log </a></p><br>
+              <p><i class="fas fa-link" style="margin-right: 10px;"></i> <a
+                  href="http://10.53.159.150:8080/jenkins/job/Build_Generator_ssa/lastSuccessfulBuild/artifact/summary.xml"
+                  target="_blank">summary.xml</a></p><br>
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="myModal1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Status Information</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <h6>{{message}}</h6>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

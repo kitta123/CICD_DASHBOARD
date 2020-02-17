@@ -1,0 +1,25 @@
+.wrapper main .sidebar .sidebar-menu > div {
+    padding: 0px !important;
+}
+
+
+.wrapper.default-theme main .sidebar .sidebar-menu .menu-items a:hover, .wrapper.default-theme main .sidebar .sidebar-menu .menu-items a.active {
+    background: #afafaf !important;
+    color: rgba(61, 68, 101, 0.9);
+}
+
+.red{
+    color:  orange !important;
+    animation:blinkingText 1.2s infinite;
+}
+
+@keyframes blinkingText{
+    0%{     color: orange;    }
+    49%{    color: orange; }
+    60%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: orange;    }
+}
+.green{
+    color: green !important;
+}

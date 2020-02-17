@@ -1,0 +1,57 @@
+<aside class="sidebar shadow-sm">
+    <div class="sidebar-search pt-1 pb-1 pl-3 pr-3">
+      <input type="search" class="form-control rounded-pill" name="search" placeholder="Search ...">
+    </div>
+    <div class="sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3">
+      <div class="picture-wrapper mb-4">
+        <div class="user-picture m-auto">
+          <img src="https://ya-webdesign.com/images/avatar-png-1.png" class="img-fluid" alt="">
+        </div>
+      </div>
+      <div class="profile-details text-center pb-4">
+        <small class="text-uppercase role">{{loginname}}</small>
+      </div>
+    </div>
+    <div class="sidebar-search pt-1 pb-1 pl-3 pr-c3">
+      <input type="search" class="form-control rounded-pill" name="search" placeholder="Search ...">
+    </div>
+  <div class="sidebar-search pt-1 pb-1 pl-3 pr-3">
+    <input type="search" class="form-control rounded-pill" name="search" placeholder="Search ...">
+  </div>
+    <nav class="sidebar-menu pt-3 pb-3">
+      <div class="menu-header mt-4 mb-4">
+        <select class="form-control"  (change)="getValue($event)">
+          <option value="">Select</option>  
+          <option value="night">Nightly</option>
+          <option selected value="private">Private</option>
+        </select>
+      </div>
+      <div *ngIf="value=='private'" style="padding: 0px;">
+        <ul class="menu-items">
+          <ng-container *ngFor="let value of data; let i  = index;">
+            <li >
+              <a [class.active]="selectedIndex1 === i" (click)="CallHome1(value.build_number, i)" style="cursor: pointer;" routerLinkActive="active">
+                <i class="fas fa-dot-circle fa-2x" [ngClass]="(value.image_tag== 'null')?'red':'green'"></i>
+                <span [title]="value.image_name">{{value.image_name | slice:0:15}} </span> 
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+      <div *ngIf="value=='night'" style="padding: 0px;">
+        <ul class="menu-items">
+          <ng-container *ngFor="let value of data1; let j  = index;">
+            <li>
+              <a [class.active]="selectedIndex2 === j" (click)="CallHome(value.image_tag, j)" style="cursor: pointer;"  routerLinkActive="active">
+                <i class="fas fa-dot-circle fa-2x"></i>
+                <span>:{{value.image_tag}}</span>
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+      <div class="view-source mb-3">
+  
+      </div>
+    </nav>
+  </aside>
